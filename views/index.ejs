@@ -1,0 +1,23 @@
+<h1>Whatsapp bot</h1><br>
+
+<p>Click the button below to generate a qrcode.</p><br>
+
+<button>Click me!</button>
+
+<p id="qr-code"></p>
+
+<script>
+  const button = document.querySelector('button');
+
+  button.addEventListener('click', async (e) => {
+    e.preventDefault();
+
+    await fetch('/genQR', {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' }
+    }).then(async (res) => {
+      await res.json();
+      document.getElementById('qr-code').innerHTML = res;
+    }).catch(error => console.log('error'))
+  })
+</script>
